@@ -15,7 +15,7 @@ class AssignmentController extends Controller
             $assignments = $assignments->where('category', $request->filter);
         }
 
-        return view('assignments.index', ['assignments' => $assignments->toArray()]);
+        return view('assignments.index', compact('assignments'));
     }
 
     public function store(Request $request)
@@ -32,6 +32,7 @@ class AssignmentController extends Controller
 
         $assignments = session('assignments', []);
         $assignments[] = $validated;
+
         session(['assignments' => $assignments]);
 
         return redirect('/assignments');
@@ -44,10 +45,12 @@ class AssignmentController extends Controller
             if ($assignment['id'] === $id) {
                 $assignment['status'] = $request->input('status');
             }
+
             return $assignment;
         })->toArray();
 
         session(['assignments' => $assignments]);
+
         return redirect('/assignments');
     }
 
@@ -56,10 +59,11 @@ class AssignmentController extends Controller
         // Refactored custom array_filter to a human-readable collection reject method
         $assignments = collect(session('assignments', []))
             ->reject(fn($assignment) => $assignment['id'] === $id)
-            ->values() // Automatically re-indexes the array keys cleanly
+            ->values()
             ->toArray();
 
         session(['assignments' => $assignments]);
+
         return redirect('/assignments');
     }
 }
