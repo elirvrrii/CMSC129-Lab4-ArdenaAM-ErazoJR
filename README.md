@@ -49,12 +49,12 @@ The pipeline enforces a strict **Test-Before-Deploy** paradigm. The workflow com
 #### 🔴 1. Red Phase Failing Pipeline (Milestone Evidence)
 This run proves the Red phase of TDD. The pipeline successfully builds, but deliberately fails during the test execution block because the application logic features do not exist yet.
 * **Screenshot Reference:**
-  ![Failing Pipeline Run - Red Phase](docs/pipeline-red.png)
+  ![Failing Pipeline Run - Red Phase](screenshots/ci_cd_red.png)
 
 #### 🟢 2. Green Phase Passing Pipeline (Minimum Implementation Evidence)
 This run confirms the Green phase of TDD. After implementing the minimum required controller actions and view structures, the exact same test definitions now pass completely, triggering a successful live build.
 * **Screenshot Reference:**
-  ![Passing Pipeline Run - Green Phase](docs/pipeline-green.png)
+  ![Passing Pipeline Run - Green Phase](screenshots/ci_cd_green.png)
 
 ## Test Results
 
