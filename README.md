@@ -41,3 +41,15 @@ The following are user stories to be used in testing the application.
 - Commit 8 - [DOCS] Integration test results
 
 ![Integration Test Terminal Output](screenshots/commit8.png)
+
+- Commit 13 - [RED] System tests for assignment user stories
+
+![System Test RED Terminal Output](backlogd/screenshots/system_test_red.png)
+
+- Commit 14 - [GREEN] Implement UI for assignment system tests
+
+![System Test GREEN Terminal Output](backlogd/screenshots/system_test_green.png)
+
+- Commit 15 - [REFACTOR] Clean up assignment controller logic
+
+![System Test REFACTOR Terminal Output](backlogd/screenshots/system_test_refactor.png)
