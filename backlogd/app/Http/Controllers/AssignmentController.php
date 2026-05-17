@@ -8,15 +8,14 @@ class AssignmentController extends Controller
 {
     public function index(Request $request)
     {
-        $assignments = session('assignments', []);
+        // Using Laravel collections to handle filtering fluently
+        $assignments = collect(session('assignments', []));
 
         if ($request->filled('filter')) {
-            $assignments = array_filter($assignments, function($assignment) use ($request) {
-                return $assignment['category'] === $request->filter;
-            });
+            $assignments = $assignments->where('category', $request->filter);
         }
 
-        return view('assignments.index', ['assignments' => $assignments]);
+        return view('assignments.index', ['assignments' => $assignments->toArray()]);
     }
 
     public function store(Request $request)
@@ -40,13 +39,13 @@ class AssignmentController extends Controller
 
     public function update(Request $request, $id)
     {
-        $assignments = session('assignments', []);
-
-        foreach ($assignments as &$assignment) {
+        // Refactored from a custom foreach loop to a clean collection map
+        $assignments = collect(session('assignments', []))->map(function ($assignment) use ($id, $request) {
             if ($assignment['id'] === $id) {
                 $assignment['status'] = $request->input('status');
             }
-        }
+            return $assignment;
+        })->toArray();
 
         session(['assignments' => $assignments]);
         return redirect('/assignments');
@@ -54,14 +53,13 @@ class AssignmentController extends Controller
 
     public function destroy($id)
     {
-        $assignments = session('assignments', []);
+        // Refactored custom array_filter to a human-readable collection reject method
+        $assignments = collect(session('assignments', []))
+            ->reject(fn($assignment) => $assignment['id'] === $id)
+            ->values() // Automatically re-indexes the array keys cleanly
+            ->toArray();
 
-        $assignments = array_filter($assignments, function($assignment) use ($id) {
-            return $assignment['id'] !== $id;
-        });
-
-        // Re-index array keys to avoid numeric session gaps
-        session(['assignments' => array_values($assignments)]);
+        session(['assignments' => $assignments]);
         return redirect('/assignments');
     }
 }
