@@ -13,13 +13,16 @@ class AssignmentSystemTest extends DuskTestCase
     public function test_user_can_create_assignment(): void
     {
         $this->browse(function (Browser $browser) {
+
             $browser->visit('/assignments')
                     ->type('title', 'CMSC 129 Lab')
                     ->type('course', 'CMSC 129')
                     ->select('category', 'Homework')
-                    ->select('status', 'In Progress')
-                    ->type('deadline', '2026-05-20T23:59')
-                    ->press('Save')
+                    ->select('status', 'In Progress');
+
+            $browser->script("document.getElementById('deadline').value = '2026-05-20T23:59';");
+
+            $browser->press('Save')
                     ->assertSee('CMSC 129 Lab');
         });
     }

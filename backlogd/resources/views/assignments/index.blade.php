@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Backlogd</title>
+    <title>Backlogd Assignment Tracker</title>
 </head>
 <body>
 
@@ -28,18 +28,22 @@
         <option value="Abandoned">Abandoned</option>
     </select>
 
-    <input type="datetime-local" name="deadline">
+    <input type="datetime-local" id="deadline" name="deadline">
 
     <button type="submit">Save</button>
 </form>
+
+<hr>
 
 @if(count($assignments) > 0)
     <ul>
         @foreach($assignments as $assignment)
             <li>
                 {{ $assignment['title'] }}
-                - {{ $assignment['course'] }}
-                - {{ $assignment['status'] }}
+                -
+                {{ $assignment['course'] }}
+                -
+                {{ $assignment['status'] }}
             </li>
         @endforeach
     </ul>
