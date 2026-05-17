@@ -29,3 +29,7 @@ The following are user stories to be used in testing the application.
 4. Run `php artisan key:generate` 
 5. Run `php artisan migrate`
 6. Run `php artisan serve`
+
+## CI/CD Setup  
+
+## Test Results

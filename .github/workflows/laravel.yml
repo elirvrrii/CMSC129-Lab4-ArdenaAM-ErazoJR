@@ -1,0 +1,51 @@
+name: TDD Deployment Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  laravel-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.3'
+        extensions: mbstring, xml, ctype, iconv, sqlite3
+
+    - name: Copy .env File
+      run: cp .env.example .env
+
+    - name: Install Dependencies
+      run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+    - name: Generate Application Key
+      run: php artisan key:generate
+
+    - name: Configure Chrome Driver Binary
+      run: php artisan dusk:chrome-driver --detect
+
+    - name: Start Background App Server
+      run: php artisan serve --port=8000 &
+
+    - name: Execute Unit and Feature Test Suites
+      run: php artisan test
+
+    - name: Execute Dusk Browser System Tests
+      env:
+        APP_URL: http://127.0.0.1:8000
+      run: php artisan dusk
+
+  deploy:
+    needs: laravel-tests
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - name: Trigger Render Live Webhook Deployment
+      # Replace this URL string with your actual Render Deploy Hook URL when generated in the final phase
+      run: curl -X GET "https://api.render.com/deploy/srv-xxxxxxxxxxxx?key=yyyyyyyyyyy"
