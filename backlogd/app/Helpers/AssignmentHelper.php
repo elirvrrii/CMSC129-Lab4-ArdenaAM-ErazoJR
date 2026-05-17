@@ -8,9 +8,6 @@ class AssignmentHelper
 {
     public static function isOverdue(string $deadline, string $status): bool
     {
-        if (in_array($status, ['Completed', 'Abandoned'])) {
-            return false;
-        }
-        return Carbon::parse($deadline)->isPast();
+        return !in_array($status, ['Completed', 'Abandoned']) && Carbon::parse($deadline)->isPast();
     }
 }
