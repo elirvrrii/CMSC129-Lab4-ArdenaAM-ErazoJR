@@ -77,3 +77,12 @@ This run confirms the Green phase of TDD. After implementing the minimum require
 - Commit 15 - [REFACTOR] Clean up assignment controller logic
 
 ![System Test REFACTOR Terminal Output](backlogd/screenshots/system_test_refactor.png)
+
+- Final 
+
+![Final Test Results](backlogd/screenshots/final_test_suite.png)
+
+## Reflection
+
+Writing tests is still confusing for the both of us, but it gave us a deeper understanding of how coding in general works. Writing tests can be a little difficult since basically the files are still non-existent so without the right plan (and maybe the right flowchart), we can compare this to like finding the light switch in the middle of a dark room, fumbling around nothing. But writing tests is interesting in the sense that we were forced to prepare for things beforehand, and we think this line of thinking will lead us to a better formulation of our code. This process emphasizes efficiency and optimization which can benefit our way of writing code in the long run.
+
