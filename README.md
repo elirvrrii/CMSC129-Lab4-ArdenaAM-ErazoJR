@@ -38,7 +38,7 @@ The following are user stories to be used in testing the application.
 
 ![Unit Test Terminal Output](screenshots/commit4.png)
 
-- Commit 8 - [DOCS] Integration test results
+- Commit 8 - [DOCS] Integration test results 
 
 ![Integration Test Terminal Output](screenshots/commit8.png)
 
